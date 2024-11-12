@@ -101,7 +101,7 @@ async def teacher_loop(cfg: DictConfig):
 
     with open('log.jsonl', 'w') as log:
         for i in range(start_iteration, cfg.iterations):
-            torch.save(agent, f'{i}.pt')
+            torch.save(agent, f'model.pt')
 
             context = Context(d, None, [])
             # 1- Run conjecturing model to obtain N conjectures.
@@ -241,7 +241,6 @@ async def teacher_loop(cfg: DictConfig):
                 agent.train(examples)
 
             save_json(examples, f'examples_{i}.json')
-            save_json(outcomes, f'outcomes_{i}.json')
             torch.save(student_results, f'results_{i}.json')
 
 
