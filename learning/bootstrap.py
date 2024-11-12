@@ -74,24 +74,9 @@ async def teacher_loop(cfg: DictConfig):
     if continue_dir is not None:
         os.chdir(continue_dir)
         print('Continuing run from', continue_dir)
-        # Find largest iteration number such that i.pt exists.
-        i = 0
-        while os.path.exists(f'{i}.pt'):
-            i += 1
-        i -= 1
-        start_iteration = i
-        agent = torch.load(f'{i}.pt')
-        print('Loaded agent from', f'{i}.pt')
+        agent = torch.load(f'model.pt')
+        print('Loaded agent from', os.path.join(continue_dir, 'model.pt'))
         # Load examples and outcomes.
-        if i > 0:
-            with open(f'outcomes_{i-1}.json', 'r') as f:
-                outcomes = json.load(f)
-                proven_conjectures = [o['problem'] for o in outcomes
-                                      if o['hindsight'] is False and
-                                         o['proof'] is not None]
-                seen_hindsight_goals = {o['problem'] for o in outcomes
-                                        if o['hindsight'] and o['proof'] is not None}
-
         print('Loaded', len(proven_conjectures), 'proven conjectures from previous run.')
 
 
