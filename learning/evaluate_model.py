@@ -9,6 +9,13 @@ import peano
 import bootstrap
 from tqdm import tqdm
 
+
+
+#############################################################################################################################################################
+#               Script to evaluate the model on the final goals. Make sure it is in the learning/ folder                                                    #                                                  
+#               Usage: python learning/evaluate_model.py --run_dir outputs/2024-11-12/23-22-47/ --final_goal_path "../gc-minimo/goals/nat-add-hard.json"    # 
+#############################################################################################################################################################
+
 def load_final_goals(path):
     goals_dict = json.load(open(path))
     final_goals = []
